@@ -1,0 +1,67 @@
+# ==========================================
+# Environments & Secrets
+# ==========================================
+.env
+.env.local
+.venv/
+venv/
+ENV/
+env/
+
+# ==========================================
+# Project Data Directories & Raw Files
+# ==========================================
+# Input and Output Folders
+DATA/
+parsed_data/
+
+# Document & Document Parsing Formats
+*.pdf
+*.PDF
+*.md
+!README.md
+
+# Tabular & Structured Data Files
+*.csv
+*.tsv
+*.parquet
+*.pq
+*.xlsx
+*.xls
+*.json
+*.jsonl
+
+# ==========================================
+# Vector Databases (Pinecone, Qdrant & Others)
+# ==========================================
+# Pinecone Local Cache & Index Files
+.pinecone/
+pinecone_index/
+
+# Qdrant Local Storage (Embedded/Local Mode)
+qdrant_data/
+.qdrant/
+*.snapshots/
+
+# Other Local Vector Stores / Databases
+chroma_db/
+faiss_index/
+*.db
+*.sqlite3
+
+# ==========================================
+# Python Bytecode & Cache
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# ==========================================
+# IDE & System Files
+# ==========================================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
