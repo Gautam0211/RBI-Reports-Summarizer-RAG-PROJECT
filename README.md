@@ -9,10 +9,10 @@ Built with a dual-vector hybrid search engine (Dense + Sparse BM25) in **Qdrant*
 ## 🌟 Key Features
 
 * **📄 Complex PDF Parsing:** Uses **LlamaParse** to accurately extract structured text and complex tables/markdown matrices from RBI policy documents.
+* **🧩 Structural & Recursive Chunking:** Combines **Markdown Header Text Chunker** with **Recursive Character Text Splitter** to preserve section hierarchies and semantic context across large reports.
 * **🔎 Dual Hybrid Retrieval:** Combines **Dense Semantic Search** (`BAAI/bge-base-en-v1.5`) with **Sparse Keyword Search** (`BM25`) inside **Qdrant Vector DB** using Reciprocal Rank Fusion (RRF).
 * **🎯 Cross-Encoder Reranking:** Filters and re-ranks initial candidates using `BAAI/bge-reranker-base` to feed only high-precision chunks to the LLM.
 * **🛡️ Constrained Synthesis:** Employs **Google Gemini** with strict system guardrails to eliminate hallucinations and generate quantitative, bulleted summaries with source citations.
-* **📊 Automated Quality Benchmarking:** Integrated **RAGAS** test suite to grade system performance across **Faithfulness**, **Answer Relevancy**, **Context Precision**, and **Context Recall**.
 * **💻 Interactive Dashboard:** Streamlit UI featuring document context switching, multi-turn chat memory, and status tracking.
 
 ---
@@ -20,15 +20,16 @@ Built with a dual-vector hybrid search engine (Dense + Sparse BM25) in **Qdrant*
 ## 🛠️ System Architecture
 
 ```text
-┌─────────────────┐      ┌────────────────────┐      ┌───────────────────────────┐
-│  RBI PDF Report │ ───> │     LlamaParse     │ ───> │  Recursive Text Splitter  │
-└─────────────────┘      └────────────────────┘      └─────────────┬─────────────┘
-                                                                   │
-                                                                   ▼
-┌─────────────────┐      ┌────────────────────┐      ┌───────────────────────────┐
-│ Gemini Synthesis│ <─── │ Cross-Encoder      │ <─── │ Qdrant Hybrid Search      │
-│  (Streamlit UI) │      │ (bge-reranker-base)│      │ (Dense BGE-1.5 + Sparse)  │
-└─────────────────┘      └────────────────────┘      └───────────────────────────┘
+┌─────────────────┐      ┌────────────────────┐      ┌───────────────────────────────────┐
+│  RBI PDF Report │ ───> │     LlamaParse     │ ───> │ Markdown Header Text Chunker +    │
+└─────────────────┘      └────────────────────┘      │ Recursive Character Text Splitter │
+                                                             └─────────────────┬─────────────────┘
+                                                                               │
+                                                                               ▼
+┌─────────────────┐      ┌────────────────────┐      ┌───────────────────────────────────┐
+│ Gemini Synthesis│ <─── │ Cross-Encoder      │ <─── │ Qdrant Hybrid Search              │
+│  (Streamlit UI) │      │ (bge-reranker-base)│      │ (Dense BGE-1.5 + Sparse BM25)     │
+└─────────────────┘      └────────────────────┘      └───────────────────────────────────┘
 
 ## Repository Structure  
 
@@ -39,5 +40,5 @@ Built with a dual-vector hybrid search engine (Dense + Sparse BM25) in **Qdrant*
 ├── .env.example             # Environment Variables Template
 ├── DATA/                    # Local Raw RBI PDF Documents (Ignored by Git)
 └── README.md                # Project Documentation
-## Running the Application
+##  Running the Application
 streamlit run app.py
