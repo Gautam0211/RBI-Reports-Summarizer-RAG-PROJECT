@@ -42,3 +42,14 @@ Built with a dual-vector hybrid search engine (Dense + Sparse BM25) in **Qdrant*
 └── README.md                # Project Documentation
 ##  Running the Application
 streamlit run app.py
+
+### 💡 Model Summary Matrix
+
+| Stage | Model / Tool | Architecture Type | Main Purpose |
+| :--- | :--- | :--- | :--- |
+| **Parsing** | **LlamaParse** | Vision-Layout Parser | Extract tables & Markdown matrices from PDFs |
+| **Dense Search** | **`bge-base-en-v1.5`** | Dense BERT Encoder (768d) | Capture conceptual & semantic meaning |
+| **Sparse Search** | **BM25** | Lexical Term Model | Match exact terms, acronyms, and figures |
+| **Reranking** | **`bge-reranker-base`** | Cross-Encoder | Score & rank query-context pairs for top precision |
+| **Generation** | **Gemini 3.6 Flash** | Generative LLM | Synthesize guarded, cited answers |
+| **Evaluation** | **Gemini + RAGAS** | LLM-as-a-Judge | Automated benchmark grading (0.0 to 1.0) |
