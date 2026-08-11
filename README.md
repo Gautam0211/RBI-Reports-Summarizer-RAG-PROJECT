@@ -26,8 +26,6 @@ Built with a dual-vector hybrid search engine (Dense + Sparse BM25) in **Qdrant*
 | **Sparse Search** | **BM25** | Lexical Term Model | Match exact terms, acronyms, and figures |
 | **Reranking** | **`bge-reranker-base`** | Cross-Encoder | Score & rank query-context pairs for top precision |
 | **Generation** | **Gemini 3.6 Flash** | Generative LLM | Synthesize guarded, cited answers |
-| **Evaluation** | **Gemini + RAGAS** | LLM-as-a-Judge | Automated benchmark grading (0.0 to 1.0) |
-
 
 ## 🛠️ System Architecture
 
