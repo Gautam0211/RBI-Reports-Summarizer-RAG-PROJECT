@@ -1,4 +1,4 @@
-# 🏦 RBI Macroeconomic & Policy RAG Assistant
+# 🏦 RBI Macroeconomic & Policy RAG Assistant Chatbot
 
 An enterprise-grade Hybrid Retrieval-Augmented Generation (RAG) system designed to parse, index, search, and synthesize insights from Reserve Bank of India (RBI) Monetary Policy and Financial Stability Reports. 
 
@@ -16,6 +16,18 @@ Built with a dual-vector hybrid search engine (Dense + Sparse BM25) in **Qdrant*
 * **💻 Interactive Dashboard:** Streamlit UI featuring document context switching, multi-turn chat memory, and status tracking.
 
 ---
+
+### 💡 Model Summary Matrix
+
+| Stage | Model / Tool | Architecture Type | Main Purpose |
+| :--- | :--- | :--- | :--- |
+| **Parsing** | **LlamaParse** | Vision-Layout Parser | Extract tables & Markdown matrices from PDFs |
+| **Dense Search** | **`bge-base-en-v1.5`** | Dense BERT Encoder (768d) | Capture conceptual & semantic meaning |
+| **Sparse Search** | **BM25** | Lexical Term Model | Match exact terms, acronyms, and figures |
+| **Reranking** | **`bge-reranker-base`** | Cross-Encoder | Score & rank query-context pairs for top precision |
+| **Generation** | **Gemini 3.6 Flash** | Generative LLM | Synthesize guarded, cited answers |
+| **Evaluation** | **Gemini + RAGAS** | LLM-as-a-Judge | Automated benchmark grading (0.0 to 1.0) |
+
 
 ## 🛠️ System Architecture
 
@@ -43,13 +55,3 @@ Built with a dual-vector hybrid search engine (Dense + Sparse BM25) in **Qdrant*
 ##  Running the Application
 streamlit run app.py
 
-### 💡 Model Summary Matrix
-
-| Stage | Model / Tool | Architecture Type | Main Purpose |
-| :--- | :--- | :--- | :--- |
-| **Parsing** | **LlamaParse** | Vision-Layout Parser | Extract tables & Markdown matrices from PDFs |
-| **Dense Search** | **`bge-base-en-v1.5`** | Dense BERT Encoder (768d) | Capture conceptual & semantic meaning |
-| **Sparse Search** | **BM25** | Lexical Term Model | Match exact terms, acronyms, and figures |
-| **Reranking** | **`bge-reranker-base`** | Cross-Encoder | Score & rank query-context pairs for top precision |
-| **Generation** | **Gemini 3.6 Flash** | Generative LLM | Synthesize guarded, cited answers |
-| **Evaluation** | **Gemini + RAGAS** | LLM-as-a-Judge | Automated benchmark grading (0.0 to 1.0) |
